@@ -26,11 +26,26 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    mygraphicitem.cpp
+    mygraphicitem.cpp \
+    speedometer_lea.cpp \
+    tachometergauge_lea.cpp \
+    fuelgauge.cpp \
+    voyant_lea.cpp \
+    aiguille_lea.cpp
 
 HEADERS += \
         mainwindow.h \
-    mygraphicitem.h
+    mygraphicitem.h \
+    speedometer_lea.h \
+    tachometergauge_lea.h \
+    fuelgauge.h \
+    voyant_lea.h \
+    aiguille_lea.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    fuel.qrc
+
+DISTFILES +=

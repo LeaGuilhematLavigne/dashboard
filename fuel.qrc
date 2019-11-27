@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fuel.png</file>
+        <file>fuel2.png</file>
+        <file>ABS.png</file>
+        <file>Battery.png</file>
+        <file>BootLid.png</file>
+        <file>ClignottantDroit.png</file>
+        <file>ClignottantGauche.png</file>
+        <file>CoolantTemp.png</file>
+        <file>FeuDeBrouillardArriere.png</file>
+        <file>FeuDeBrouillardAvant.png</file>
+        <file>FeuDeCroisement.png</file>
+        <file>FeuDePosition.png</file>
+        <file>FeuDeRoute.png</file>
+        <file>Handbrake.png</file>
+        <file>Oil.png</file>
+        <file>PorteOuverte.png</file>
+        <file>Seatbelt.png</file>
+    </qresource>
+</RCC>
