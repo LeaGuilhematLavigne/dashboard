@@ -24,17 +24,14 @@ public:
     QGraphicsView *view = new QGraphicsView();
     QGraphicsScene *scene = new QGraphicsScene ();
     mygraphicItem *myitem = new mygraphicItem ();
-    speedometer_Lea *compteur_vitesse = new speedometer_Lea;
-    TachometerGauge_Lea *tours_minute = new TachometerGauge_Lea;
-    FuelGauge *essence = new FuelGauge;
-    voyant_Lea *fuel = new voyant_Lea;
+
 
 
     ~MainWindow();
 
 public slots :
     void Scene();
-    void vitesse();
+
 
 
 private:

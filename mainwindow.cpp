@@ -6,6 +6,9 @@
 #include "fuelgauge.h"
 #include "voyant_lea.h"
 #include "aiguille_lea.h"
+#include "deux_voyants.h"
+#include "quatre_voyants.h"
+#include <QFontDatabase>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,12 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->verticalSlider->setValue(0);
-    ui->verticalSlider->setMaximum(300);
-    ui->verticalSlider->setMinimum(-20);
+QFontDatabase::addApplicationFont(":/Seven Segment.ttf");
     ui->graphicsView->setBackgroundBrush(QBrush(Qt::black));
-
-   connect(ui->verticalSlider,SIGNAL(actionTriggered(int)),this, SLOT(vitesse()));
 
 }
 
@@ -30,14 +29,13 @@ MainWindow::~MainWindow()
 void MainWindow::Scene()
 {
     ui->graphicsView->setScene(scene);
-//    myitem->v1 = ui->verticalSlider->value();
-//    scene->addItem(myitem);
 
-    //speedometer_Lea *compteur_vitesse = new speedometer_Lea;
-    compteur_vitesse->v1 = ui->verticalSlider->value();
-    scene->addItem(compteur_vitesse);
+    speedometer_Lea *compteur = new speedometer_Lea;
+    compteur->parametrage(400.0,200.0,160.0,225,-270,270,220);
+    compteur->setValue(120);
+    scene->addItem(compteur);
 
-
+    deux_voyants *fuel = new deux_voyants;
     fuel->parametrage(580,320,":/fuel.png",":/fuel2.png");
     fuel->setSize(30,30);
     fuel->on=1;
@@ -48,32 +46,39 @@ void MainWindow::Scene()
     GaugeEssence->setValue(25);
     scene->addItem(GaugeEssence);
 
-    aiguille_Lea *aiguille_vitesse = new aiguille_Lea;
-    aiguille_vitesse->parametrage(400.0,200.0,9.0,160.0,225,270,270);
-    aiguille_vitesse->setValue(150);
-    scene->addItem(aiguille_vitesse);
-
-
     TachometerGauge_Lea *Gauge_Tours = new TachometerGauge_Lea;
-    Gauge_Tours->parametrage(140.0,240.0,130.0,230,50,180);
+    Gauge_Tours->parametrage(140.0,240.0,130.0,230,50,180,41,6);
+    Gauge_Tours->setValue(5000);
     scene->addItem(Gauge_Tours);
 
+    voyant_Lea *porteD_arr_ouverte = new voyant_Lea;
+    porteD_arr_ouverte->parametrage(380,400,":/PorteOuvertePassagerD.png");
+    porteD_arr_ouverte->setSize(80,80);
+    porteD_arr_ouverte->on=1;
+    scene->addItem(porteD_arr_ouverte);
 
-    aiguille_Lea *aiguille_tours = new aiguille_Lea;
-    aiguille_tours->parametrage(140.0,240.0,9.0,130,225,50,41);
-    aiguille_tours->setValue(200);
-    scene->addItem(aiguille_tours);
+    voyant_Lea *porteG_arr_ouverte = new voyant_Lea;
+    porteG_arr_ouverte->parametrage(380,400,":/PorteOuvertePassagerG.png");
+    porteG_arr_ouverte->setSize(80,80);
+    porteG_arr_ouverte->on=0;
+    scene->addItem(porteG_arr_ouverte);
 
-    voyant_Lea *porte_ouverte = new voyant_Lea;
-    porte_ouverte->parametrage(380,400,":/PorteOuverte.png");
-    porte_ouverte->setSize(80,80);
-    porte_ouverte->on=0;
-    scene->addItem(porte_ouverte);
+    voyant_Lea *porteD_avt_ouverte = new voyant_Lea;
+    porteD_avt_ouverte->parametrage(380,400,":/PorteOuverte.png");
+    porteD_avt_ouverte->setSize(80,80);
+    porteD_avt_ouverte->on=0;
+    scene->addItem(porteD_avt_ouverte);
+
+    voyant_Lea *porteG_avt_ouverte = new voyant_Lea;
+    porteG_avt_ouverte->parametrage(380,400,":/PorteOuverteConducteur.png");
+    porteG_avt_ouverte->setSize(80,80);
+    porteG_avt_ouverte->on=0;
+    scene->addItem(porteG_avt_ouverte);
 
     voyant_Lea *clignoGauche = new voyant_Lea;
     clignoGauche->parametrage(180,50,":/ClignottantGauche.png");
     clignoGauche->setSize(70,50);
-    clignoGauche->on=0;
+    clignoGauche->on=1;
     scene->addItem(clignoGauche);
 
     voyant_Lea *clignoDroit = new voyant_Lea;
@@ -82,18 +87,61 @@ void MainWindow::Scene()
     clignoDroit->on=0;
     scene->addItem(clignoDroit);
 
+    voyant_Lea *handbrakeOn = new voyant_Lea;
+    handbrakeOn->parametrage(320,430,":/Handbrake.png");
+    handbrakeOn->setSize(50,50);
+    handbrakeOn->on=1;
+    scene->addItem(handbrakeOn);
+
+    voyant_Lea *Battery = new voyant_Lea;
+    Battery->parametrage(260,430,":/Icones_Voyants/battery.gif");
+    Battery->setSize(50,50);
+    Battery->on=1;
+    scene->addItem(Battery);
+
+    voyant_Lea *Seatbelt = new voyant_Lea;
+    Seatbelt->parametrage(215,440,":/Icones_Voyants/seatBeltSign_red.gif");
+    Seatbelt->setSize(35,35);
+    Seatbelt->on=5;
+    scene->addItem(Seatbelt);
+
+    voyant_Lea *Oil = new voyant_Lea;
+    Oil->parametrage(160,430,":/Oil.png");
+    Oil->setSize(50,50);
+    Oil->on=1;
+    scene->addItem(Oil);
+
+    Quatre_Voyants *phares = new Quatre_Voyants;
+    phares->parametrage(460,430,":/Icones_Voyants/dayLight.gif",":/Icones_Voyants/lowBeam.gif",":/Icones_Voyants/highBeam.gif");
+    phares->setSize(50,50);
+    phares->on=5;
+    scene->addItem(phares);
+
+    voyant_Lea *phares_brouillard_avant = new voyant_Lea;
+    phares_brouillard_avant->parametrage(520,430,":/Icones_Voyants/frontFogLight.gif");
+    phares_brouillard_avant->setSize(50,50);
+    phares_brouillard_avant->on=1;
+    scene->addItem(phares_brouillard_avant);
+
+    voyant_Lea *phares_brouillard_arriere = new voyant_Lea;
+    phares_brouillard_arriere->parametrage(570,430,":/Icones_Voyants/rearFogLight_blue.gif");
+    phares_brouillard_arriere->setSize(50,50);
+    phares_brouillard_arriere->on=1;
+    scene->addItem(phares_brouillard_arriere);
 
 
 
-//    speedometer_Lea *compteur = new speedometer_Lea;
-//    compteur->parametrage(400.0,200.0,160.0,225,270,315,28,270);
-//    scene->addItem(compteur);
+
+//    voyant_Lea *Oil = new voyant_Lea;
+//    Oil->parametrage(160,440,":/Oil.png");
+//    Oil->setSize(50,50);
+//    Oil->on=1;
+//    scene->addItem(Oil);
+
+
+
+
+
 
 }
 
-void MainWindow::vitesse()
-{
-    compteur_vitesse->v1 = ui->verticalSlider->value();
-    tours_minute->v1 = ui->verticalSlider->value();
-    scene->update();
-}

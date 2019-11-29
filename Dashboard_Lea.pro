@@ -31,7 +31,11 @@ SOURCES += \
     tachometergauge_lea.cpp \
     fuelgauge.cpp \
     voyant_lea.cpp \
-    aiguille_lea.cpp
+    aiguille_lea.cpp \
+    lea_scene.cpp \
+    lea_scenedefond.cpp \
+    deux_voyants.cpp \
+    quatre_voyants.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +44,11 @@ HEADERS += \
     tachometergauge_lea.h \
     fuelgauge.h \
     voyant_lea.h \
-    aiguille_lea.h
+    aiguille_lea.h \
+    lea_scene.h \
+    lea_scenedefond.h \
+    deux_voyants.h \
+    quatre_voyants.h
 
 FORMS += \
         mainwindow.ui

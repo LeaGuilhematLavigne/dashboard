@@ -28,9 +28,7 @@ void aiguille_Lea::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     int v;
     if (vitesse>=0 && vitesse <=vitesse_max) {v=vitesse;}
     else if (vitesse<0) {v=0;}
-    else {v=270;}
-//    xpos=x+taille_aiguille*(cos((angle_depart-v)*pi/180));      //position de la pointe de la fleche =xc (centre du cercle)+rayon du cercle (taille aiguille)*cos (angle formé)
-//    ypos=y-taille_aiguille*(sin((angle_depart-v)*pi/180));
+    else {v=vitesse_max;}
 
     QPen pen;
     QBrush brush(Qt::SolidPattern);
@@ -43,12 +41,14 @@ void aiguille_Lea::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->setBrush(brush);
     QPointF points[3] =
     {
-          QPointF(x-r*cos((angle_depart-vitesse-90)*pi/180),y+r*sin((angle_depart-vitesse-90)*pi/180)),     //xc -9(taille rayon base aiguille)*cos (angle -90(angle droit aiguille))
-          QPointF(x+taille_aiguille*(cos((angle_depart-vitesse)*pi/180)), y-taille_aiguille*(sin((angle_depart-vitesse)*pi/180))),
-          QPointF(x+r*cos((angle_depart-vitesse-90)*pi/180),y-r*sin((angle_depart-vitesse-90)*pi/180))
+          QPointF(x-r*cos((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse-90)*pi/180),y+r*sin((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse-90)*pi/180)),     //xc -9(taille rayon base aiguille)*cos (angle -90(angle droit aiguille))
+          QPointF(x+taille_aiguille*(cos((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse)*pi/180)), y-taille_aiguille*(sin((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse)*pi/180))),
+          QPointF(x+r*cos((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse-90)*pi/180),y-r*sin((angle_depart-(angle_fin*1.0f/vitesse_max)*vitesse-90)*pi/180))
      };
 
     painter->drawConvexPolygon(points, 3);
+
+
 // ******************** Dessine le cercle au centre du cadran par dessus la fin de l'aiguille
     pen.setColor(Qt::transparent);
     QLinearGradient linearGradie(QPointF(385, 185), QPointF(415, 215));

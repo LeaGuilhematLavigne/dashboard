@@ -1,13 +1,13 @@
-#ifndef VOYANT_LEA_H
-#define VOYANT_LEA_H
+#ifndef DEUX_VOYANTS_H
+#define DEUX_VOYANTS_H
 #include <QString>
 #include <QGraphicsItem>
 #include <QRectF>
 
-class voyant_Lea: public QGraphicsItem
+class deux_voyants : public QGraphicsItem
 {
 public:
-    voyant_Lea(QGraphicsItem *parent = nullptr);
+    deux_voyants(QGraphicsItem *parent = nullptr);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QString chemin, chemin2;
@@ -15,7 +15,8 @@ public:
     void setSize(int, int);
     QSize taille1;
     QSize taille2;
-    virtual void parametrage(int param_x,int param_y, QString param_chemin);
+    virtual void parametrage(int param_x,int param_y, QString param_chemin,QString param_chemin2);
+
 };
 
-#endif // VOYANT_LEA_H
+#endif // DEUX_VOYANTS_H

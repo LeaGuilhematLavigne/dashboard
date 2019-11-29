@@ -1,4 +1,4 @@
-#include "voyant_lea.h"
+#include "deux_voyants.h"
 #include <iostream>
 #include <vector>
 #include <QGraphicsItem>
@@ -11,35 +11,31 @@
 #include <QPointF>
 #include <QPixmap>
 
-voyant_Lea::voyant_Lea(QGraphicsItem *parent) :
+deux_voyants::deux_voyants(QGraphicsItem *parent) :
     QGraphicsItem(parent)
 {
 
 }
 
-QRectF voyant_Lea::boundingRect() const
+QRectF deux_voyants::boundingRect() const
 {
     QRectF rectf(0,0,800,500);
 
     return rectf;
 }
 
-void voyant_Lea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void deux_voyants::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     if (on==1)
   {   QPixmap voyant (chemin);
     QPixmap voyant2= voyant.scaled(taille1);
     painter->drawPixmap(x,y,voyant2);
   }
-    else if (on==0)
+    else if (on==2)
     {
-        QPen pen;
-        QBrush brush;
-        pen.setColor(Qt::transparent);
-        brush.setColor(Qt::transparent);
-        painter->setPen(pen);
-        painter->setBrush(brush);
-        painter->drawRect(x,y,30,30);
+        QPixmap voyant (chemin2);
+        QPixmap voyant2 = voyant.scaled(taille1);
+        painter->drawPixmap(x,y,voyant2);
     }
     else
     {
@@ -51,20 +47,17 @@ void voyant_Lea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->setBrush(brush);
         painter->drawRect(x,y,30,30);
     }
-
 }
 
-void voyant_Lea::setSize(int w, int h)
+void deux_voyants::setSize(int w, int h)
 {
-   taille1=QSize(w,h);
-
-
+    taille1=QSize(w,h);
 }
 
-void voyant_Lea::parametrage(int param_x, int param_y, QString param_chemin)
+void deux_voyants::parametrage(int param_x, int param_y, QString param_chemin, QString param_chemin2)
 {
     x=param_x;
     y=param_y;
     chemin=param_chemin;
-
+    chemin2=param_chemin2;
 }
